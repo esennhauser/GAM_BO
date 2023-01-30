@@ -1,5 +1,6 @@
 import time
 import pytest
+import unittest
 import requests
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
@@ -33,3 +34,20 @@ def test_many_logins():
     login_function.successful_login("standard_user", "secret_sauce", "PRODUCTS")
 
 
+def test_endpoint_successful():
+    response = requests.get('https://reqres.in/api/users/8')
+    jason_response = response.json()
+    if response.status_code == 200:
+        print("\nSUCCESS")
+    elif response.status_code == 201:
+        print("\nSUCCESS")
+    else:
+        print("\nThis is an exam")
+
+def test_endpoint_failed():
+    response = requests.get('https://reqres.in/api/users/8')
+    jason_response = response.json()
+    if response.status_code == 404:
+        print("\nERROR 404")
+    else:
+        print("\nThis is an exam")
