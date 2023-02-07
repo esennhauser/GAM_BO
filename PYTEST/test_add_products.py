@@ -21,7 +21,7 @@ def setup_function(function):
     global driver
     driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
     f = Functions(driver)
-    f.go_to("https://www.saucedemo.com/", t)
+    f.go_to("https://gam-gam-renovacion-backoffice.development.mag.dev/login", t)
     f.introduce_text("user-name", "standard_user", t)
     f.introduce_text("password", "secret_sauce", t)
     f.click("login-button", t)
