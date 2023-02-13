@@ -7,7 +7,7 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import Select
 from selenium.common.exceptions import TimeoutException
-from Functions.functions import Functions
+from PYTEST.Functions.functions import Functions
 
 
 class FunctionsLogin():

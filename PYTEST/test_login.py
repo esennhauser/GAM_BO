@@ -1,4 +1,4 @@
-from page_login import FunctionsLogin
+from PYTEST.Pages.page_login import FunctionsLogin
 
 def test_failed_logins():
     driver = ""
