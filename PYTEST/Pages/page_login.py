@@ -1,7 +1,6 @@
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
 from webdriver_manager.chrome import ChromeDriverManager
-from unittest_assertions import AssertEqual
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support.ui import WebDriverWait
@@ -11,36 +10,22 @@ from selenium.common.exceptions import TimeoutException
 from PYTEST.Functions.functions import Functions
 
 
-class FunctionsLogin():
+class LoginPage(Functions):
+
+    username_textbox =":r0:"
+    password_textbox = "auth-login-password"
+    login_button ="//*[@id='__next']/div/div/div/div/div/form/button"
+    username_error = "//*[@id='__next']/div/div/div/div/div/form/div[1]/p"
+    password_error = "//p[@id='']"
+    mensaje_bienvenido = "//h5[contains(.,'Bienvenido a Gam')]"
 
     def __init__(self):
         driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
-        self.f = Functions(driver)
-        self.f.go_to("https://gam-gam-renovacion-backoffice.development.mag.dev/login")
+        self.browser = Functions(driver)
+        self.browser.go_to("https://gam-gam-renovacion-backoffice.development.mag.dev/login")
 
-    def failed_login_username_message(self, username, password, username_message):
-        self.f.introduce_text(":r0:", username)
-        self.f.introduce_text("auth-login-password", password)
-        self.f.click_by_xpath("//*[@id='__next']/div/div/div/div/div/form/button")
-        error = self.f.select_element_by_xpath("//*[@id='__next']/div/div/div/div/div/form/div[1]/p")
-        assert_equal = AssertEqual()
-        assert_equal(error.text, username_message)
+    def login(self, username, password):
+        self.browser.introduce_text_by_xpath(self.username_textbox, username)
+        self.browser.introduce_text_by_xpath(self.password_textbox, password)
+        self.browser.click_by_xpath(self.login_button)
 
-    def failed_login_password_message(self, username, password, password_message):
-        self.f.introduce_text(":r0:", username)
-        self.f.introduce_text("auth-login-password", password)
-        self.f.click_by_xpath("//*[@id='__next']/div/div/div/div/div/form/button")
-        error = self.f.select_element_by_xpath("//p[@id='']")
-        assert_equal = AssertEqual()
-        assert_equal(error.text, password_message)
-
-    def successful_login(self, username, password, product_text):
-        self.f.go_to("https://gam-gam-renovacion-backoffice.development.mag.dev/login")
-        self.f.introduce_text(":r0:", username)
-        self.f.introduce_text("auth-login-password", password)
-        self.f.click_by_xpath("//*[@id='__next']/div/div/div/div/div/form/button")
-        product_element = self.f.select_element_by_xpath("//*[@id='__next']/div/main/h3")
-        if product_element.text == product_text:
-            print("\t\t-----PASSED-----\n\n")
-        else:
-            print("\t\t-----FAILED-----\n\n")

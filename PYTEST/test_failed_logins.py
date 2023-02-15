@@ -1,34 +1,53 @@
 import pytest
-from PYTEST.Pages.page_login import FunctionsLogin
+from PYTEST.Pages.page_login import LoginPage
 
 
-def test_wrong_username_and_password():
+@pytest.fixture
+def setup_login():
+    global login_function
+    login_function = LoginPage()
+
+def teardown_function():
+    login_function.browser.driver.close()
+
+@pytest.mark.failed_login1
+def test_wrong_username_and_password(setup_login):
     print("\n\t\t-----Test wrong username and wrong password-----")
-    login_function = FunctionsLogin()
-    login_function.failed_login_username_message("ernesto", "password123", "Email or Password is invalid")
-    login_function.f.driver.close()
+    login_function.login("ernesto", "password123")
+    error = login_function.browser.select_element_by_xpath(login_function.username_error)
+    assert error.text == "Email or Password is invalid", "ERROR. Unexpected error message."
 
-def test_empty_username_and_wrong_password():
+
+@pytest.mark.failed_login2
+def test_empty_username_and_wrong_password(setup_login):
     print("\n\t\t-----Test empty username and wrong password-----")
-    login_function = FunctionsLogin()
-    login_function.failed_login_username_message("", "password123", "username must be at least 6 characters")
-    login_function.f.driver.close()
+    login_function.login("", "password123")
+    error = login_function.browser.select_element_by_xpath(login_function.username_error)
+    assert error.text == "username must be at least 6 characters", "ERROR. Unexpected error message."
 
-def test_wrong_username_and_empty_password():
+
+@pytest.mark.failed_login3
+def test_wrong_username_and_empty_password(setup_login):
     print("\n\t\t-----Test wrong username and wrong password-----")
-    login_function = FunctionsLogin()
-    login_function.failed_login_password_message("ernesto", "", "password must be at least 6 characters")
-    login_function.f.driver.close()
+    login_function.login("ernesto", "")
+    error = login_function.browser.select_element_by_xpath(login_function.password_error)
+    assert error.text == "password must be at least 6 characters", "ERROR. Unexpected error message."
 
-def test_empty_username_and_empty_password():
+
+@pytest.mark.failed_login4
+def test_empty_username_and_empty_password(setup_login):
     print("\t\t-----Test empty username and empty password-----")
-    login_function = FunctionsLogin()
-    login_function.failed_login_username_message("", "", "username must be at least 6 characters")
-    login_function.f.driver.close()
+    login_function.login("", "")
+    error = login_function.browser.select_element_by_xpath(login_function.username_error)
+    assert error.text == "username must be at least 6 characters", "ERROR. Unexpected error message."
 
-def test_wrong_password():
+
+@pytest.mark.failed_login5
+def test_wrong_password(setup_login):
     print("\t\t-----Test wrong password-----")
-    login_function = FunctionsLogin()
-    login_function.failed_login_username_message("standard_user", "password123", "Email or Password is invalid")
-    login_function.f.driver.close()
+    login_function.login("standard_user", "password123", )
+    error = login_function.browser.select_element_by_xpath(login_function.username_error)
+    assert error.text == "Email or Password is invalid", "ERROR. Unexpected error message."
+
+
 
