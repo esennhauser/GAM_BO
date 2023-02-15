@@ -7,13 +7,13 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import Select
 from selenium.common.exceptions import TimeoutException
-from PYTEST.Functions.functions import Functions
+from Functions.functions import Functions
 
 
 class LoginPage(Functions):
 
-    username_textbox =":r0:"
-    password_textbox = "auth-login-password"
+    username_textbox ="//input[@id=':r0:']"
+    password_textbox = "//input[@id='auth-login-password']"
     login_button ="//*[@id='__next']/div/div/div/div/div/form/button"
     username_error = "//*[@id='__next']/div/div/div/div/div/form/div[1]/p"
     password_error = "//p[@id='']"

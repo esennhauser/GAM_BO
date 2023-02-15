@@ -7,8 +7,8 @@ from PYTEST.Pages.page_login import LoginPage
 
 class HomePage(LoginPage):
     avatar = "//div[@class='MuiAvatar-root MuiAvatar-circular MuiAvatar-colorDefault css-yq2ef9']"
-    cerrar_sesion = "//li[@class='MuiButtonBase-root MuiMenuItem-root MuiMenuItem-gutters MuiMenuItem-" \
-                    "rootMuiMenuItem-gutters css-158bkwc'][contains(.,'Cerrar sesión')]"
+    cerrar_sesion = "//li[@class='MuiButtonBase-root MuiMenuItem-root MuiMenuItem-gutters MuiMenuItem-root " \
+                    "MuiMenuItem-gutters css-158bkwc'][contains(.,'Cerrar sesión')]"
     mensaje_inicio = "//*[@id='__next']/div/main/h3"
 
     def __init__(self):

@@ -3,15 +3,15 @@ from PYTEST.Pages.home_page import HomePage
 
 def users_Data():
     return [
-        ("test_1","Magnetico22!"),
-        ("staff1", "Magnetico22!"),
-        ("administrador_general", "Magnetico22!"),
-        ("administrativo1", "Magnetico22!"),
-        ("ecommerce1", "Magnetico22!"),
-        ("managerzonal1", "Magnetico22!"),
-        ("managergba", "Magnetico22!"),
-        ("logistica1", "Magnetico22!"),
-        ("vendedor4", "Magnetico22!")
+        ("administrative@test.com","g4mr3n0v4c10n"),
+        ("client@test.com", "g4mr3n0v4c10n"),
+        ("ecommerce@test.com", "g4mr3n0v4c10n"),
+        ("general_administrator@test.com", "g4mr3n0v4c10n"),
+        ("logistic@test.com", "g4mr3n0v4c10n"),
+        ("manager_gba@test.com", "g4mr3n0v4c10n"),
+        ("manager_zonal@test.com", "g4mr3n0v4c10n"),
+        ("staff@test.com", "g4mr3n0v4c10n"),
+        ("admin@guialemor.com", "g4mr3n0v4c10n")
 
     ]
 
@@ -24,7 +24,7 @@ def setup_login():
 
 @pytest.mark.login_logout
 @pytest.mark.parametrize("username,password", users_Data())
-def test_log_out_admin_user(username, password):
+def test_log_out_admin_user(setup_login, username, password):
     print("\n\t\t-----Test log out for Admin user-----")
     function_home_page.login(username, password)
     inicio = function_home_page.browser.select_element_by_xpath(function_home_page.mensaje_inicio)
