@@ -24,7 +24,7 @@ class Functions:
             val = self.driver.find_element(By.XPATH, selector)
             val.clear()
             val.send_keys(text)
-            print("Writing on the field {} the text -> {} ".format(selector, text))
+            print("Writing the text: {} ".format(text))
         except TimeoutException as ex:
             print(ex.msg)
             print(selector + "Element wasn't found")
@@ -35,7 +35,6 @@ class Functions:
             self.driver.execute_script("arguments[0].scrollIntoView();", val)
             val = self.driver.find_element(By.ID, selector)
             val.click()
-            print("Clicking {}  ".format(selector))
         except TimeoutException as ex:
             print(ex.msg)
             print(selector + "Element wasn't found")
@@ -46,7 +45,6 @@ class Functions:
             self.driver.execute_script("arguments[0].scrollIntoView();", val)
             val = self.driver.find_element(By.XPATH, selector)
             val.click()
-            print("Clicking {}  ".format(selector))
         except TimeoutException as ex:
             print(ex.msg)
             print(selector + "Element wasn't found")

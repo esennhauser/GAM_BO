@@ -1,8 +1,8 @@
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
 from webdriver_manager.chrome import ChromeDriverManager
-from PYTEST.Functions.functions import Functions
-from PYTEST.Pages.page_login import LoginPage
+from Functions.functions import Functions
+from Pages.page_login import LoginPage
 
 
 class HomePage(LoginPage):

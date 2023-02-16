@@ -1,5 +1,5 @@
 import pytest
-from PYTEST.Pages.home_page import HomePage
+from Pages.home_page import HomePage
 
 def users_Data():
     return [
