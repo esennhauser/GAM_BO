@@ -1,16 +1,10 @@
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
 from webdriver_manager.chrome import ChromeDriverManager
-from selenium.webdriver.common.by import By
-from selenium.webdriver.common.keys import Keys
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
-from selenium.webdriver.support.ui import Select
-from selenium.common.exceptions import TimeoutException
-from Functions.functions import Functions
+from Pages.base_page import BasePage
 
 
-class LoginPage(Functions):
+class LoginPage(BasePage):
 
     username_textbox ="//input[@id=':r0:']"
     password_textbox = "//input[@id='auth-login-password']"
@@ -21,7 +15,8 @@ class LoginPage(Functions):
 
     def __init__(self):
         driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
-        self.browser = Functions(driver)
+        self.browser = BasePage(driver)
+        #self.browser.go_to("https://mail.google.com/")
         self.browser.go_to("https://gam-gam-renovacion-backoffice.development.mag.dev/login")
 
     def login(self, username, password):

@@ -23,6 +23,7 @@ def test_wrong_username_and_password(setup_login):
     error = login_function.browser.select_element_by_xpath(login_function.username_error)
     assert error.text == "Email or Password is invalid", "ERROR. Unexpected error message."
 
+
 @pytest.mark.failed_run
 def test_empty_username_and_wrong_password(setup_login):
     print("\n\t\t-----Test empty username and wrong password-----")
