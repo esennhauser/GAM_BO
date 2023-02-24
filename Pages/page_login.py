@@ -14,9 +14,8 @@ class LoginPage(BasePage):
     mensaje_bienvenido = "//h5[contains(.,'Bienvenido a Gam')]"
 
     def __init__(self):
-        driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
-        self.browser = BasePage(driver)
-        #self.browser.go_to("https://mail.google.com/")
+        self.driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
+        self.browser = BasePage(self.driver)
         self.browser.go_to("https://gam-gam-renovacion-backoffice.development.mag.dev/login")
 
     def login(self, username, password):

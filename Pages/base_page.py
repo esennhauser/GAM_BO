@@ -5,6 +5,7 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import TimeoutException
 from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.chrome.service import Service
+from selenium.webdriver.common.action_chains import ActionChains
 
 
 class BasePage:
@@ -21,7 +22,6 @@ class BasePage:
     def introduce_text_by_xpath(self, selector, text):
         try:
             val = WebDriverWait(self.driver, 5).until(EC.visibility_of_element_located((By.XPATH, selector)))
-            self.driver.execute_script("arguments[0].scrollIntoView();", val)
             val = self.driver.find_element(By.XPATH, selector)
             val.clear()
             val.send_keys(text)
@@ -42,8 +42,7 @@ class BasePage:
 
     def click_by_xpath(self, selector):
         try:
-            val = WebDriverWait(self.driver, 5).until(EC.visibility_of_element_located((By.XPATH, selector)))
-            self.driver.execute_script("arguments[0].scrollIntoView();", val)
+            WebDriverWait(self.driver, 5).until(EC.visibility_of_element_located((By.XPATH, selector)))
             val = self.driver.find_element(By.XPATH, selector)
             val.click()
         except TimeoutException as ex:
@@ -55,3 +54,10 @@ class BasePage:
         self.driver.execute_script("arguments[0].scrollIntoView();", val)
         val = self.driver.find_element(By.XPATH, element)
         return val
+
+    def select_option_by_xpath(self, element, text):
+        val = WebDriverWait(self.driver, 5).until(EC.visibility_of_element_located((By.XPATH, element)))
+        self.driver.execute_script("arguments[0].scrollIntoView();", val)
+        val = self.driver.find_element(By.XPATH, element)
+        action = ActionChains(self.driver)
+        action.click(element).perform()

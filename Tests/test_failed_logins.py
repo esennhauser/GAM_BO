@@ -18,8 +18,6 @@ def teardown_function():
 def test_wrong_username_and_password(setup_login):
     print("\n\t\t-----Test wrong username and wrong password-----")
     login_function.login("ernesto", "password123")
-    allure.attach(login_function.browser.driver.get_screenshot_as_png(), name="user",
-                  attachment_type=AttachmentType.PNG)
     error = login_function.browser.select_element_by_xpath(login_function.username_error)
     assert error.text == "Email or Password is invalid", "ERROR. Unexpected error message."
 
