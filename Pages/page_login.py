@@ -2,6 +2,7 @@ from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
 from webdriver_manager.chrome import ChromeDriverManager
 from Pages.base_page import BasePage
+from selenium.webdriver.chrome.options import Options
 
 
 class LoginPage(BasePage):
@@ -14,7 +15,9 @@ class LoginPage(BasePage):
     mensaje_bienvenido = "//h5[contains(.,'Bienvenido a Gam')]"
 
     def __init__(self):
-        self.driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
+        options = Options()
+        options.headless = False
+        self.driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=options)
         self.browser = BasePage(self.driver)
         self.browser.go_to("https://gam-gam-renovacion-backoffice.development.mag.dev/login")
 

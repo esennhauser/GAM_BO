@@ -15,13 +15,13 @@ class BasePage:
 
     def go_to(self, url):
         self.driver.get(url)
-        self.driver.implicitly_wait(20)
+        self.driver.implicitly_wait(10)
         self.driver.maximize_window()
         print("Page opened: "+str(url))
 
     def introduce_text_by_xpath(self, selector, text):
         try:
-            val = WebDriverWait(self.driver, 5).until(EC.visibility_of_element_located((By.XPATH, selector)))
+            val = WebDriverWait(self.driver, 3).until(EC.visibility_of_element_located((By.XPATH, selector)))
             val = self.driver.find_element(By.XPATH, selector)
             val.clear()
             val.send_keys(text)
@@ -32,7 +32,7 @@ class BasePage:
 
     def click_by_id(self, selector):
         try:
-            val = WebDriverWait(self.driver, 5).until(EC.visibility_of_element_located((By.ID, selector)))
+            val = WebDriverWait(self.driver, 3).until(EC.visibility_of_element_located((By.ID, selector)))
             self.driver.execute_script("arguments[0].scrollIntoView();", val)
             val = self.driver.find_element(By.ID, selector)
             val.click()
@@ -42,7 +42,7 @@ class BasePage:
 
     def click_by_xpath(self, selector):
         try:
-            WebDriverWait(self.driver, 5).until(EC.visibility_of_element_located((By.XPATH, selector)))
+            WebDriverWait(self.driver, 3).until(EC.visibility_of_element_located((By.XPATH, selector)))
             val = self.driver.find_element(By.XPATH, selector)
             val.click()
         except TimeoutException as ex:
@@ -50,14 +50,14 @@ class BasePage:
             print(selector + "Element wasn't found")
 
     def select_element_by_xpath(self, element):
-        val = WebDriverWait(self.driver, 5).until(EC.visibility_of_element_located((By.XPATH, element)))
+        val = WebDriverWait(self.driver, 3).until(EC.visibility_of_element_located((By.XPATH, element)))
         self.driver.execute_script("arguments[0].scrollIntoView();", val)
         val = self.driver.find_element(By.XPATH, element)
         return val
 
-    def select_option_by_xpath(self, element, text):
-        val = WebDriverWait(self.driver, 5).until(EC.visibility_of_element_located((By.XPATH, element)))
+    def select_option_by_xpath(self, element, option):
+        val = WebDriverWait(self.driver, 3).until(EC.visibility_of_element_located((By.XPATH, element)))
         self.driver.execute_script("arguments[0].scrollIntoView();", val)
-        val = self.driver.find_element(By.XPATH, element)
-        action = ActionChains(self.driver)
-        action.click(element).perform()
+        self.click_by_xpath(element)
+        self.driver.find_element(By.XPATH, option)
+        self.click_by_xpath(option)
