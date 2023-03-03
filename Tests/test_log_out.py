@@ -1,7 +1,8 @@
 import pytest
 from Pages.home_page import HomePage
 
-def users_Data():
+
+def users_data():
     return [
         ("administrative@test.com","g4mr3n0v4c10n"),
         ("client@test.com", "g4mr3n0v4c10n"),
@@ -23,7 +24,7 @@ def setup_login():
 
 
 @pytest.mark.login_logout
-@pytest.mark.parametrize("username,password", users_Data())
+@pytest.mark.parametrize("username,password", users_data())
 def test_log_out_admin_user(setup_login, username, password):
     print("\n\t\t-----Test log out for Admin user-----")
     function_home_page.login(username, password)

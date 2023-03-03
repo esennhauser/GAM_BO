@@ -7,13 +7,14 @@ class NewUserPage(UsersPage):
     avatar = "//div[@class='MuiAvatar-root MuiAvatar-circular MuiAvatar-colorDefault css-yq2ef9']"
     cerrar_sesion = "//li[@class='MuiButtonBase-root MuiMenuItem-root MuiMenuItem-gutters MuiMenuItem-root " \
                     "MuiMenuItem-gutters css-158bkwc'][contains(.,'Cerrar sesión')]"
-    nombre = "//input[@id=':rf:']"
-    apellido = "//input[@id=':rg:']"
-    user = "//input[@id=':rh:']"
-    email = "//input[@id=':ri:']"
-    password = "//input[@id=':rj:']"
-    habilitacion = "//body/div[@id='__next']/div[1]/div[2]/main[1]/div[1]/div[1]/div[2]/form[1]/div[7]/div[1]/label[1]/span[1]/input[1]"
-    salesman = "//input[@id=':rp:']"
+    nombre = "//h6[@class='MuiTypography-root MuiTypography-h6 css-1y7uqee']//following::input[1]"
+    apellido = "//h6[@class='MuiTypography-root MuiTypography-h6 css-1y7uqee']//following::input[2]"
+    user = "//h6[@class='MuiTypography-root MuiTypography-h6 css-1y7uqee']//following::input[3]"
+    email = "//h6[@class='MuiTypography-root MuiTypography-h6 css-1y7uqee']//following::input[4]"
+    password = "//h6[@class='MuiTypography-root MuiTypography-h6 css-1y7uqee']//following::input[5]"
+    habilitacion = "//body/div[@id='__next']/div[1]/div[2]/main[1]/div[1]/div[1]/div[2]/form[1]/div[7]/div[1]" \
+                   "/label[1]/span[1]/input[1]"
+    salesman = "//h6[@class='MuiTypography-root MuiTypography-h6 css-1y7uqee']//following::input[6]"
     confirmar = "//body/div[@id='__next']/div[1]/main[1]/div[1]/div[1]/div[2]/form[1]/div[9]/button[1]"
 
     rol = "//div[@id='select-role']"
