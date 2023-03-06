@@ -4,9 +4,11 @@ import time
 
 
 class NewUserPage(UsersPage):
+
     avatar = "//div[@class='MuiAvatar-root MuiAvatar-circular MuiAvatar-colorDefault css-yq2ef9']"
     cerrar_sesion = "//li[@class='MuiButtonBase-root MuiMenuItem-root MuiMenuItem-gutters MuiMenuItem-root " \
                     "MuiMenuItem-gutters css-158bkwc'][contains(.,'Cerrar sesión')]"
+
     nombre = "//h6[@class='MuiTypography-root MuiTypography-h6 css-1y7uqee']//following::input[1]"
     apellido = "//h6[@class='MuiTypography-root MuiTypography-h6 css-1y7uqee']//following::input[2]"
     user = "//h6[@class='MuiTypography-root MuiTypography-h6 css-1y7uqee']//following::input[3]"
@@ -15,8 +17,9 @@ class NewUserPage(UsersPage):
     habilitacion = "//body/div[@id='__next']/div[1]/div[2]/main[1]/div[1]/div[1]/div[2]/form[1]/div[7]/div[1]" \
                    "/label[1]/span[1]/input[1]"
     salesman = "//h6[@class='MuiTypography-root MuiTypography-h6 css-1y7uqee']//following::input[6]"
-    confirmar = "//body/div[@id='__next']/div[1]/main[1]/div[1]/div[1]/div[2]/form[1]/div[9]/button[1]"
+    confirmar = "//button[contains(.,'Confirmar')]"
 
+    # Roles
     rol = "//div[@id='select-role']"
 
     rol_administrador = "//body/div[@id='menu-']/div[3]/ul[1]/li[1]"
@@ -31,6 +34,17 @@ class NewUserPage(UsersPage):
 
     roles = [rol_administrador, rol_vendedor, rol_logística, rol_staff, rol_manager_gba, rol_manager_zonal,
              rol_ecommerce, rol_administrativo, rol_administrador_general]
+
+    # Error messages
+    error_nombre = "//p[contains(.,'No se permiten caracteres especiales') or contains(.,'Campo requerido')]"
+    error_apellido = "//p[contains(.,'Campo requerido')]"
+    error_user = "//p[contains(.,'Campo requerido')]"
+    error_email = "//p[contains(.,'Debe ser un email válido')]"
+    error_password = "//p[contains(.,'Campo requerido')]"
+    error_rol = "//p[contains(.,'Campo requerido')]"
+    error_salesman = "//p[contains(.,'Debe ingresar un número')]"
+
+    errors = [error_nombre, error_apellido, error_user, error_email, error_password, error_rol]
 
     def fill_in_and_confirm(self, nombre, apellido, user, email, password, rol, habilitacion, salesman):
         self.introduce_text_by_xpath(self.nombre, nombre)
