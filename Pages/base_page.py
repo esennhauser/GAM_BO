@@ -50,7 +50,7 @@ class BasePage:
             print(selector + "Element wasn't found")
 
     def select_element_by_xpath(self, element):
-        val = WebDriverWait(self.driver, 3).until(EC.visibility_of_element_located((By.XPATH, element)))
+        val = WebDriverWait(self.driver, 2).until(EC.visibility_of_element_located((By.XPATH, element)))
         self.driver.execute_script("arguments[0].scrollIntoView();", val)
         val = self.driver.find_element(By.XPATH, element)
         return val

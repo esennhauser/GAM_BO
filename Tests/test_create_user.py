@@ -67,6 +67,7 @@ class TestCreateUser:
         user_created = user_creation.search_user(nombre + " " + apellido)
         try:
             assert user_created.text == (nombre + " " + apellido), "ERROR. User was not created successfully."
+            print("User created successfully")
         except Exception as e:
             print(e)
 
