@@ -25,11 +25,11 @@ def setup_login():
 
 @pytest.mark.login_logout
 @pytest.mark.parametrize("username,password", users_data())
-def test_log_out_admin_user(setup_login, username, password):
-    print("\n\t\t-----Test log out for Admin user-----")
+def test_log_out(setup_login, username, password):
+    print("\n\t\t-----Test log out-----")
     function_home_page.login(username, password)
     inicio = function_home_page.browser.select_element_by_xpath(function_home_page.mensaje_inicio)
-    assert inicio.text == "Inicio", "ERROR. Log in failed."
+    assert inicio.text == "Gam", "ERROR. Log in failed."
     function_home_page.log_out()
     welcome_message = function_home_page.browser.select_element_by_xpath(function_home_page.mensaje_bienvenido)
     assert welcome_message.text == "Bienvenido a Gam", "ERROR. Log out failed."

@@ -9,7 +9,7 @@ class HomePage(LoginPage):
     avatar = "//div[@class='MuiAvatar-root MuiAvatar-circular MuiAvatar-colorDefault css-yq2ef9']"
     cerrar_sesion = "//li[@class='MuiButtonBase-root MuiMenuItem-root MuiMenuItem-gutters MuiMenuItem-root " \
                     "MuiMenuItem-gutters css-158bkwc'][contains(.,'Cerrar sesión')]"
-    mensaje_inicio = "//*[@id='__next']/div/main/h3"
+    mensaje_inicio = "//h6[contains(.,'Gam')]"
     administrador = "//p[contains(text(),'Administrador')]"
     usuarios = "//header/div[2]/div[1]/div[1]/div[8]/div[1]/div[1]/div[1]/a[4]/div[1]"
 
