@@ -26,7 +26,7 @@ class BasePage:
             val.clear()
             val.send_keys(text)
             print("Writing the text: {} ".format(text))
-        except TimeoutException as ex:
+        except Exception as ex:
             print(ex.msg)
             print(selector + "Element wasn't found")
 
@@ -36,7 +36,7 @@ class BasePage:
             self.driver.execute_script("arguments[0].scrollIntoView();", val)
             val = self.driver.find_element(By.ID, selector)
             val.click()
-        except TimeoutException as ex:
+        except Exception as ex:
             print(ex.msg)
             print(selector + "Element wasn't found")
 
@@ -45,19 +45,27 @@ class BasePage:
             WebDriverWait(self.driver, 3).until(EC.visibility_of_element_located((By.XPATH, selector)))
             val = self.driver.find_element(By.XPATH, selector)
             val.click()
-        except TimeoutException as ex:
+        except Exception as ex:
             print(ex.msg)
             print(selector + "Element wasn't found")
 
     def select_element_by_xpath(self, element):
-        val = WebDriverWait(self.driver, 2).until(EC.visibility_of_element_located((By.XPATH, element)))
-        self.driver.execute_script("arguments[0].scrollIntoView();", val)
-        val = self.driver.find_element(By.XPATH, element)
-        return val
+        try:
+            val = WebDriverWait(self.driver, 2).until(EC.visibility_of_element_located((By.XPATH, element)))
+            self.driver.execute_script("arguments[0].scrollIntoView();", val)
+            val = self.driver.find_element(By.XPATH, element)
+            return val
+        except Exception as ex:
+            print(ex.msg)
+            print(element + "Element wasn't found")
 
     def select_option_by_xpath(self, element, option):
-        val = WebDriverWait(self.driver, 3).until(EC.visibility_of_element_located((By.XPATH, element)))
-        self.driver.execute_script("arguments[0].scrollIntoView();", val)
-        self.click_by_xpath(element)
-        self.driver.find_element(By.XPATH, option)
-        self.click_by_xpath(option)
+        try:
+            val = WebDriverWait(self.driver, 3).until(EC.visibility_of_element_located((By.XPATH, element)))
+            self.driver.execute_script("arguments[0].scrollIntoView();", val)
+            self.click_by_xpath(element)
+            self.driver.find_element(By.XPATH, option)
+            self.click_by_xpath(option)
+        except Exception as ex:
+            print(ex.msg)
+            print(element + "Element wasn't found")
