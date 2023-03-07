@@ -10,6 +10,8 @@ from selenium.webdriver.common.action_chains import ActionChains
 
 class BasePage:
 
+    driver = None
+
     def __init__(self, driver):
         self.driver = driver
 

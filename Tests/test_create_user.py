@@ -62,7 +62,6 @@ class TestCreateUser:
             print(e.msg)
 
     @pytest.mark.usefixtures("setup_login")
-    @pytest.mark.successful_creation
     @pytest.mark.parametrize("test,nombre,apellido,username,email,contra,rol,habilitado,salesman",
                              successful_creation_user_data())
     def test_successful_user_creation(self, test, nombre, apellido, username, email, contra, rol,
@@ -80,7 +79,6 @@ class TestCreateUser:
             print(e.msg)
 
     @pytest.mark.usefixtures("setup_login")
-    @pytest.mark.delete
     @pytest.mark.parametrize("test,nombre,apellido,username,email,contra,rol,habilitado,salesman",
                              successful_creation_user_data())
     def test_delete_user(self, test, nombre, apellido, username, email, contra, rol, habilitado, salesman):
