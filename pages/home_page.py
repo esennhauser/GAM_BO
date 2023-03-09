@@ -12,8 +12,8 @@ class HomePage(LoginPage):
     usuarios = "//header/div[2]/div[1]/div[1]/div[8]/div[1]/div[1]/div[1]/a[4]/div[1]"
 
     def log_out(self):
-        self.browser.click_by_xpath(self.avatar)
-        self.browser.click_by_xpath(self.cerrar_sesion)
+        self.click_by_xpath(self.avatar)
+        self.click_by_xpath(self.cerrar_sesion)
         time.sleep(1)
 
     def go_to_usuarios(self):

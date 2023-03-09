@@ -52,12 +52,12 @@ class NewUserPage(UsersPage):
         self.introduce_text_by_xpath(self.user, user)
         self.introduce_text_by_xpath(self.email, email)
         self.introduce_text_by_xpath(self.password, password)
-        self.browser.select_option_by_xpath(self.rol, rol)
+        self.select_option_by_xpath(self.rol, rol)
         if habilitacion is True:
             pass
         else:
-            self.browser.select_element_by_xpath(self.rol).send_keys(Keys.TAB + Keys.SPACE)
-        self.browser.select_element_by_xpath(self.rol).send_keys(Keys.TAB + Keys.TAB + salesman)
-        self.browser.click_by_xpath(self.confirmar)
+            self.select_element_by_xpath(self.rol).send_keys(Keys.TAB + Keys.SPACE)
+        self.select_element_by_xpath(self.rol).send_keys(Keys.TAB + Keys.TAB + salesman)
+        self.click_by_xpath(self.confirmar)
         time.sleep(1)
 
