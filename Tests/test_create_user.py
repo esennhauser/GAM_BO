@@ -91,4 +91,4 @@ class TestCreateUser:
             assert user_to_verify == None, "ERROR. User not deleted."
             print("User successfully deleted.")
         except Exception as e:
-            print(e.msg)
+            print(e)

@@ -30,7 +30,7 @@ class UsersPage(HomePage):
 
     def confirm(self):
         self.browser.click_by_xpath(self.confirmar_pop_up)
-        time.sleep(1)
+        time.sleep(2)
 
     def cancel(self):
         self.browser.click_by_xpath(self.cancelar_pop_up)

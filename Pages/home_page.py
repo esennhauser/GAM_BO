@@ -1,7 +1,4 @@
-from selenium import webdriver
-from selenium.webdriver.chrome.service import Service
-from webdriver_manager.chrome import ChromeDriverManager
-from Pages.base_page import BasePage
+import time
 from Pages.page_login import LoginPage
 from selenium.webdriver.common.action_chains import ActionChains
 
@@ -17,6 +14,7 @@ class HomePage(LoginPage):
     def log_out(self):
         self.browser.click_by_xpath(self.avatar)
         self.browser.click_by_xpath(self.cerrar_sesion)
+        time.sleep(1)
 
     def go_to_usuarios(self):
         action = ActionChains(self.driver)
