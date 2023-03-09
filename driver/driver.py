@@ -5,7 +5,7 @@ from selenium.webdriver.chrome.service import Service
 from webdriver_manager.chrome import ChromeDriverManager
 
 
-@pytest.fixture(scope="session", autouse=True)
+@pytest.fixture(autouse=True, scope="class")
 def driver(request):
     options = Options()
     options.headless = False

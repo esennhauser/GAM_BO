@@ -20,26 +20,26 @@ def users_data():
 class TestLogOut:
     home_page = ""
 
-    @pytest.fixture
-    def setup_login(self):
-        self.home_page = HomePage()
+    @pytest.fixture(autouse=True)
+    def setup_login(self, driver):
+        self.home_page = HomePage(driver)
         yield
-        self.home_page.browser.driver.close()
+        driver.close()
 
-    @pytest.mark.usefixtures("setup_login")
     @pytest.mark.login_logout
     @pytest.mark.parametrize("username,password", users_data())
-    def test_log_out(self, username, password):
+    def test_log_out(self, setup_login, username, password):
         print("\n\t\t-----Test log out-----")
         self.home_page.login(username, password)
-        inicio = self.home_page.browser.select_element_by_xpath(self.home_page.mensaje_inicio)
+        inicio = self.home_page.select_element_by_xpath(self.home_page.mensaje_inicio)
         try:
             assert inicio.text == "Gam", "ERROR. Log in failed."
         except Exception as e:
-            print(e.msg)
+            print(e)
         self.home_page.log_out()
-        welcome_message = self.home_page.browser.select_element_by_xpath(self.home_page.mensaje_bienvenido)
+        welcome_message = self.home_page.select_element_by_xpath(self.home_page.mensaje_bienvenido)
         try:
             assert welcome_message.text == "Bienvenido a Gam", "ERROR. Log out failed."
+            print("Log in and log out successful. ")
         except Exception as e:
-            print(e.msg)
+            print(e)
