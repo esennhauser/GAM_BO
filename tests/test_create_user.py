@@ -1,6 +1,4 @@
 import pytest
-from selenium.common import StaleElementReferenceException
-import time
 from pages.new_user_page import NewUserPage
 
 
@@ -17,23 +15,19 @@ def successful_creation_user_data():
     ]
 
 
-class TestCreateUser:
-    new_user = ""
-
-    @pytest.fixture(autouse=True)
-    def setup_login(self, driver):
-        self.new_user = NewUserPage(driver)
-        self.new_user.login("admin@guialemor.com", "g4mr3n0v4c10n")
-        self.new_user.go_to_usuarios()
-        yield
-        self.new_user.driver.close()
+@pytest.fixture(scope="class", autouse=True)
+def setup_login(request, driver):
+    new_user = NewUserPage(request.cls.driver)
+    new_user.login("admin@guialemor.com", "g4mr3n0v4c10n")
+    new_user.go_to_usuarios()
+    new_user.create_user()
+    request.cls.new_user = new_user
 
 
-class TestFailedUserCreation(TestCreateUser):
-    @pytest.mark.failed_creation
-    def test_failed_user_creation(self, setup_login):
+class TestFailedUserCreation:
+
+    def test_failed_user_creation(self):
         print("\n\t\t-----Test create user with invalid email field. -----")
-        self.new_user.create_user()
         self.new_user.fill_in_and_confirm("Automated01", "Test", "automated01",
          "automated01gmail", "Password123", NewUserPage.rol_logística, True, "")
         error_message = self.new_user.select_element_by_xpath(self.new_user.error_email)
@@ -62,13 +56,13 @@ class TestFailedUserCreation(TestCreateUser):
         except Exception as e:
             print(e)
 
-    @pytest.mark.parametrize("test,nombre,apellido,username,email,contra,rol,habilitado,salesman",
-                             successful_creation_user_data())
-    def test_successful_user_creation(self, test, nombre, apellido, username, email, contra, rol,
+
+class TestSuccessfulUserCreation:
+    @pytest.mark.parametrize("nombre_test,nombre,apellido,username,email,contra,rol,habilitado,salesman",
+                             successful_creation_user_data(), scope="class")
+    def test_successful_user_creation(self, nombre_test, nombre, apellido, username, email, contra, rol,
                                       habilitado, salesman):
-        print("\n\t\t-----Test {}-----".format(test))
-        self.new_user.go_to_usuarios()
-        self.new_user.create_user()
+        print("\n\t\t-----Test {}-----".format(nombre_test))
         self.new_user.fill_in_and_confirm(nombre, apellido, username, email, contra,
                                           rol, habilitado, salesman)
         user_created = self.new_user.search_user(nombre + " " + apellido)
@@ -78,9 +72,9 @@ class TestFailedUserCreation(TestCreateUser):
         except Exception as e:
             print(e)
 
-    @pytest.mark.parametrize("test,nombre,apellido,username,email,contra,rol,habilitado,salesman",
-                             successful_creation_user_data())
-    def test_delete_user(self, test, nombre, apellido, username, email, contra, rol, habilitado, salesman):
+    @pytest.mark.parametrize("nombre_test,nombre,apellido,username,email,contra,rol,habilitado,salesman",
+                             successful_creation_user_data(), scope="class")
+    def test_delete_user(self, nombre_test, nombre, apellido, username, email, contra, rol, habilitado, salesman):
         print("\n\t\t-----Test delete created user-----")
         user_to_delete = self.new_user.search_user(nombre + " " + apellido)
         self.new_user.delete_user(user_to_delete)
@@ -91,3 +85,5 @@ class TestFailedUserCreation(TestCreateUser):
             print("User successfully deleted.")
         except Exception as e:
             print(e)
+        self.new_user.go_to_usuarios()
+        self.new_user.create_user()

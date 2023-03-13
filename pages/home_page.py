@@ -5,7 +5,7 @@ from selenium.webdriver.common.action_chains import ActionChains
 
 class HomePage(LoginPage):
 
-    avatar = "//div[@class='MuiAvatar-root MuiAvatar-circular MuiAvatar-colorDefault css-yq2ef9']"
+    avatar = "//*[@id='__next']/div/header/div[1]/div/div/div/span/div"
     cerrar_sesion = "(//li[@tabindex='-1'])[2]"
     mensaje_inicio = "//h6[contains(.,'Gam')]"
     administrador = "//p[contains(text(),'Administrador')]"

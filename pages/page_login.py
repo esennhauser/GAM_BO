@@ -7,7 +7,7 @@ from selenium.webdriver.chrome.options import Options
 
 class LoginPage(BasePage):
 
-    username_textbox ="//input[@id=':r0:']"
+    username_textbox ="//input[contains(@type,'text')]"
     password_textbox = "//input[@id='auth-login-password']"
     login_button ="//*[@id='__next']/div/div/div/div/div/form/button"
     username_error = "//*[@id='__next']/div/div/div/div/div/form/div[1]/p"

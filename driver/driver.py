@@ -5,7 +5,7 @@ from selenium.webdriver.chrome.service import Service
 from webdriver_manager.chrome import ChromeDriverManager
 
 
-@pytest.fixture(autouse=True, scope="class")
+@pytest.fixture(scope="class")
 def driver(request):
     options = Options()
     options.headless = False
@@ -15,5 +15,8 @@ def driver(request):
     driver.implicitly_wait(10)
     driver.maximize_window()
     print("Page opened: " + str(url))
-    return driver
-
+    request.cls.driver = driver
+    yield
+    driver.close()
+    driver.quit()
+    print("Test is finished.")
