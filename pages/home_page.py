@@ -14,7 +14,7 @@ class HomePage(LoginPage):
     def log_out(self):
         self.click_by_xpath(self.avatar)
         self.click_by_xpath(self.cerrar_sesion)
-        time.sleep(1)
+        time.sleep(2)
 
     def go_to_usuarios(self):
         action = ActionChains(self.driver)

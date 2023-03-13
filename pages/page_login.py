@@ -1,8 +1,6 @@
-from selenium import webdriver
-from selenium.webdriver.chrome.service import Service
-from webdriver_manager.chrome import ChromeDriverManager
+import time
 from pages.base_page import BasePage
-from selenium.webdriver.chrome.options import Options
+
 
 
 class LoginPage(BasePage):
@@ -18,4 +16,5 @@ class LoginPage(BasePage):
         self.introduce_text_by_xpath(self.username_textbox, username)
         self.introduce_text_by_xpath(self.password_textbox, password)
         self.click_by_xpath(self.login_button)
+        time.sleep(2)
 
