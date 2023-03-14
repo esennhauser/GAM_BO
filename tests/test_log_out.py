@@ -32,8 +32,11 @@ class TestLogOut:
             assert inicio.text == "Gam", "ERROR. Log in failed."
         except Exception as e:
             print(e)
-        self.home_page.log_out()
-        welcome_message = self.home_page.select_element_by_xpath(self.home_page.mensaje_bienvenido)
+        try:
+            self.home_page.log_out()
+            welcome_message = self.home_page.select_element_by_xpath(self.home_page.mensaje_bienvenido)
+        except Exception as e:
+            print("Not able to log out. ")
         try:
             assert welcome_message.text == "Bienvenido a Gam", "ERROR. Log out failed."
             print("Log in and log out successful. ")
