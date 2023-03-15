@@ -18,19 +18,31 @@ class UsersPage(HomePage):
     def search_user(self, user):
         try:
             return self.select_element_by_xpath("//a[contains(text(),'{}')]".format(user))
-        except Exception as e:
-            print("Unable to find user.")
+        except Exception as ex:
+            self.errors.append(ex.msg)
             return None
 
     def create_user(self):
-        self.click_by_xpath(self.crear_usuario)
+        try:
+            self.click_by_xpath(self.crear_usuario)
+        except Exception as ex:
+            self.errors.append(ex)
 
     def delete_user(self, user):
-        self.click_by_xpath(self.eliminar.format(user.text))
+        try:
+            self.click_by_xpath(self.eliminar.format(user.text))
+        except Exception as ex:
+            self.errors.append(ex)
 
     def confirm(self):
-        self.click_by_xpath(self.confirmar_pop_up)
-        time.sleep(2)
+        try:
+            self.click_by_xpath(self.confirmar_pop_up)
+            time.sleep(2)
+        except Exception as ex:
+            self.errors.append(ex)
 
     def cancel(self):
-        self.click_by_xpath(self.cancelar_pop_up)
+        try:
+            self.click_by_xpath(self.cancelar_pop_up)
+        except Exception as ex:
+            self.errors.append(ex)

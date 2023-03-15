@@ -12,14 +12,20 @@ class HomePage(LoginPage):
     usuarios = "//header/div[2]/div[1]/div[1]/div[8]/div[1]/div[1]/div[1]/a[4]/div[1]"
 
     def log_out(self):
-        self.click_by_xpath(self.avatar)
-        self.click_by_xpath(self.cerrar_sesion)
-        time.sleep(2)
+        try:
+            self.click_by_xpath(self.avatar)
+            self.click_by_xpath(self.cerrar_sesion)
+            time.sleep(2)
+        except Exception as ex:
+            self.errors.append(ex)
 
     def go_to_usuarios(self):
-        action = ActionChains(self.driver)
-        administrador = self.select_element_by_xpath(self.administrador)
-        action.move_to_element(administrador).perform()
-        usuarios = self.select_element_by_xpath(self.usuarios)
-        action.move_to_element(usuarios)
-        action.click(usuarios).perform()
+        try:
+            action = ActionChains(self.driver)
+            administrador = self.select_element_by_xpath(self.administrador)
+            action.move_to_element(administrador).perform()
+            usuarios = self.select_element_by_xpath(self.usuarios)
+            action.move_to_element(usuarios)
+            action.click(usuarios).perform()
+        except Exception as ex:
+            self.errors.append(ex)

@@ -10,16 +10,21 @@ from selenium.webdriver.common.action_chains import ActionChains
 
 class BasePage:
 
+    errors = []
     driver = None
 
-    def __init__(self, driver):
+    def __init__(self, driver, errors):
         self.driver = driver
+        self.errors = errors
 
     def go_to(self, url):
-        self.driver.get(url)
-        self.driver.implicitly_wait(10)
-        self.driver.maximize_window()
-        print("Page opened: "+str(url))
+        try:
+            self.driver.get(url)
+            self.driver.implicitly_wait(10)
+            self.driver.maximize_window()
+            print("Page opened: "+str(url))
+        except Exception as ex:
+            self.errors.append(ex.msg)
 
     def introduce_text_by_xpath(self, selector, text):
         try:
@@ -28,9 +33,8 @@ class BasePage:
             val.clear()
             val.send_keys(text)
             print("Writing the text: {} ".format(text))
-        except TimeoutException as ex:
-            print(ex.msg)
-            print(selector + "Element wasn't found")
+        except Exception as ex:
+            self.errors.append(ex.msg)
 
     def click_by_id(self, selector):
         try:
@@ -38,18 +42,16 @@ class BasePage:
             self.driver.execute_script("arguments[0].scrollIntoView();", val)
             val = self.driver.find_element(By.ID, selector)
             val.click()
-        except TimeoutException as ex:
-            print(ex.msg)
-            print(selector + "Element wasn't found")
+        except Exception as ex:
+            self.errors.append(ex.msg)
 
     def click_by_xpath(self, selector):
         try:
             WebDriverWait(self.driver, 3).until(EC.visibility_of_element_located((By.XPATH, selector)))
             val = self.driver.find_element(By.XPATH, selector)
             val.click()
-        except TimeoutException as ex:
-            print(ex.msg)
-            print(selector + "Element wasn't found")
+        except Exception as ex:
+            self.errors.append(ex.msg)
 
     def select_element_by_xpath(self, element):
         try:
@@ -57,9 +59,8 @@ class BasePage:
             self.driver.execute_script("arguments[0].scrollIntoView();", val)
             val = self.driver.find_element(By.XPATH, element)
             return val
-        except TimeoutException as ex:
-            print(ex.msg)
-            print(element + "Element wasn't found")
+        except Exception as ex:
+            self.errors.append(ex.msg)
 
     def select_option_by_xpath(self, element, option):
         try:
@@ -68,6 +69,6 @@ class BasePage:
             self.click_by_xpath(element)
             self.driver.find_element(By.XPATH, option)
             self.click_by_xpath(option)
-        except TimeoutException as ex:
-            print(ex.msg)
-            print(element + "Element wasn't found")
+        except Exception as ex:
+            self.errors.append(ex.msg)
+

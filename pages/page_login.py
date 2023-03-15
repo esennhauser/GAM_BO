@@ -13,8 +13,11 @@ class LoginPage(BasePage):
     mensaje_bienvenido = "//h5[contains(.,'Bienvenido a Gam')]"
 
     def login(self, username, password):
-        self.introduce_text_by_xpath(self.username_textbox, username)
-        self.introduce_text_by_xpath(self.password_textbox, password)
-        self.click_by_xpath(self.login_button)
-        time.sleep(2)
+        try:
+            self.introduce_text_by_xpath(self.username_textbox, username)
+            self.introduce_text_by_xpath(self.password_textbox, password)
+            self.click_by_xpath(self.login_button)
+            time.sleep(2)
+        except Exception as ex:
+            self.errors.append(ex)
 

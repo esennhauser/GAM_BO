@@ -47,17 +47,20 @@ class NewUserPage(UsersPage):
     errors = [error_nombre, error_apellido, error_user, error_email, error_password, error_rol]
 
     def fill_in_and_confirm(self, nombre, apellido, user, email, password, rol, habilitacion, salesman):
-        self.introduce_text_by_xpath(self.nombre, nombre)
-        self.introduce_text_by_xpath(self.apellido, apellido)
-        self.introduce_text_by_xpath(self.user, user)
-        self.introduce_text_by_xpath(self.email, email)
-        self.introduce_text_by_xpath(self.password, password)
-        self.select_option_by_xpath(self.rol, rol)
-        if habilitacion is True:
-            pass
-        else:
-            self.select_element_by_xpath(self.rol).send_keys(Keys.TAB + Keys.SPACE)
-        self.select_element_by_xpath(self.rol).send_keys(Keys.TAB + Keys.TAB + salesman)
-        self.click_by_xpath(self.confirmar)
-        time.sleep(1)
+        try:
+            self.introduce_text_by_xpath(self.nombre, nombre)
+            self.introduce_text_by_xpath(self.apellido, apellido)
+            self.introduce_text_by_xpath(self.user, user)
+            self.introduce_text_by_xpath(self.email, email)
+            self.introduce_text_by_xpath(self.password, password)
+            self.select_option_by_xpath(self.rol, rol)
+            if habilitacion is True:
+                pass
+            else:
+                self.select_element_by_xpath(self.rol).send_keys(Keys.TAB + Keys.SPACE)
+            self.select_element_by_xpath(self.rol).send_keys(Keys.TAB + Keys.TAB + salesman)
+            self.click_by_xpath(self.confirmar)
+            time.sleep(1)
+        except Exception as ex:
+            self.errors.append(ex)
 

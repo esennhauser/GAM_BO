@@ -17,7 +17,7 @@ def successful_creation_user_data():
 
 @pytest.fixture(scope="class", autouse=True)
 def setup_login(request, driver):
-    new_user = NewUserPage(request.cls.driver)
+    new_user = NewUserPage(request.cls.driver, request.cls.errors)
     new_user.login("admin@guialemor.com", "g4mr3n0v4c10n")
     new_user.go_to_usuarios()
     new_user.create_user()
@@ -33,8 +33,9 @@ class TestFailedUserCreation:
         error_message = self.new_user.select_element_by_xpath(self.new_user.error_email)
         try:
             assert error_message.text == "Debe ser un email válido", "ERROR. Unexpected error message."
-        except Exception as e:
-            print(e)
+            print("Error message as expected. ")
+        except Exception as ex:
+            self.errors.append(ex)
         self.new_user.go_to_usuarios()
         print("\n\t\t-----Test create user with a mandatory empty field. -----")
         self.new_user.create_user()
@@ -43,8 +44,9 @@ class TestFailedUserCreation:
         error_message = self.new_user.select_element_by_xpath(self.new_user.error_apellido)
         try:
             assert error_message.text == "Campo requerido", "ERROR. Unexpected error message."
-        except Exception as e:
-            print(e)
+            print("Error message as expected. ")
+        except Exception as ex:
+            self.errors.append(ex)
         self.new_user.go_to_usuarios()
         print("\n\t\t-----Test create seller user with the salesman field empty. -----")
         self.new_user.create_user()
@@ -53,8 +55,9 @@ class TestFailedUserCreation:
         error_message = self.new_user.select_element_by_xpath(self.new_user.error_salesman)
         try:
             assert error_message.text == "Debe ingresar un número", "ERROR. Unexpected error message."
-        except Exception as e:
-            print(e)
+            print("Error message as expected. ")
+        except Exception as ex:
+            self.errors.append(ex)
 
 
 class TestSuccessfulUserCreation:
@@ -69,8 +72,8 @@ class TestSuccessfulUserCreation:
         try:
             assert user_created.text == (nombre + " " + apellido), "ERROR. User was not created successfully."
             print("User created successfully")
-        except Exception as e:
-            print(e)
+        except Exception as ex:
+            self.errors.append(ex)
 
     @pytest.mark.parametrize("nombre_test,nombre,apellido,username,email,contra,rol,habilitado,salesman",
                              successful_creation_user_data(), scope="class")
@@ -83,7 +86,7 @@ class TestSuccessfulUserCreation:
         try:
             assert user_to_verify == None, "ERROR. User not deleted."
             print("User successfully deleted.")
-        except Exception as e:
-            print(e)
+        except Exception as ex:
+            self.errors.append(ex)
         self.new_user.go_to_usuarios()
         self.new_user.create_user()
