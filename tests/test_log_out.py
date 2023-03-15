@@ -26,9 +26,9 @@ class TestLogOut:
     @pytest.mark.parametrize("username,password", users_data())
     def test_log_out(self, username, password):
         print("\n\t\t-----Test log out-----")
-        self.home_page.login(username, password)
-        inicio = self.home_page.select_element_by_xpath(self.home_page.mensaje_inicio)
         try:
+            self.home_page.login(username, password)
+            inicio = self.home_page.select_element_by_xpath(self.home_page.mensaje_inicio)
             assert inicio.text == "Gam", "ERROR. Log in failed."
         except Exception as e:
             print(e)
