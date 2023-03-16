@@ -20,7 +20,16 @@ def driver(request):
     request.cls.errors = errors
     request.cls.driver = driver
     yield
-    print(errors)
+    errors_verified = errors.copy()
+    for e in errors:
+        if e == "":
+            errors_verified.remove(e)
+        else:
+            pass
+    if len(errors_verified) == 0:
+        print("\n\t\tTest finished with no errors. ")
+    else:
+        print(errors_verified)
     driver.close()
     driver.quit()
-    print("Test is finished.")
+    print("\n\t\tTest is finished.")

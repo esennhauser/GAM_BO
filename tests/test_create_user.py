@@ -71,7 +71,7 @@ class TestSuccessfulUserCreation:
         user_created = self.new_user.search_user(nombre + " " + apellido)
         try:
             assert user_created.text == (nombre + " " + apellido), "ERROR. User was not created successfully."
-            print("User created successfully")
+            print("User successfully created.")
         except Exception as ex:
             self.errors.append(ex)
 
