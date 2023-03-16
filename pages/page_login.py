@@ -17,7 +17,7 @@ class LoginPage(BasePage):
             self.introduce_text_by_xpath(self.username_textbox, username)
             self.introduce_text_by_xpath(self.password_textbox, password)
             self.click_by_xpath(self.login_button)
-            time.sleep(2)
+            time.sleep(3)
         except Exception as ex:
             self.errors.append(ex)
 
