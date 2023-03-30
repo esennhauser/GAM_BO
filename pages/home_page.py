@@ -9,7 +9,7 @@ class HomePage(LoginPage):
     cerrar_sesion = "(//li[@tabindex='-1'])[2]"
     mensaje_inicio = "//h6[contains(.,'Gam')]"
     administrador = "//p[contains(text(),'Administrador')]"
-    usuarios = "//header/div[2]/div[1]/div[1]/div[8]/div[1]/div[1]/div[1]/a[4]/div[1]"
+    usuarios = "(//div[contains(.,'Usuarios')])[6]"
 
     def log_out(self):
         try:
@@ -21,11 +21,7 @@ class HomePage(LoginPage):
 
     def go_to_usuarios(self):
         try:
-            action = ActionChains(self.driver)
-            administrador = self.select_element_by_xpath(self.administrador)
-            action.move_to_element(administrador).perform()
-            usuarios = self.select_element_by_xpath(self.usuarios)
-            action.move_to_element(usuarios)
-            action.click(usuarios).perform()
+            self.click_by_xpath(self.administrador)
+            self.click_by_xpath(self.usuarios)
         except Exception as ex:
             self.errors.append(ex)
