@@ -29,7 +29,7 @@ class TestLogOut:
         self.home_page.login(username, password)
         inicio = self.home_page.select_element_by_xpath(self.home_page.mensaje_inicio)
         try:
-            assert inicio.text == "Gam", "ERROR. Log in failed."
+            assert "Bienvenido" in inicio.text, "ERROR. Log in failed."
             print("Log in successful. ")
         except Exception as ex:
             self.errors.append(ex)

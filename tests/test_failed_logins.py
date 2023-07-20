@@ -8,8 +8,8 @@ def setup_login(request, driver):
     request.cls.login = login
 
 
-class TestWrongUsernameAndPassword:
-    def test_wrong_username_and_password(self, driver):
+class TestWrongUsernameAndWrongPassword:
+    def test_wrong_username_and_wrong_password(self):
         print("\n\t\t-----Test wrong username and wrong password-----")
         self.login.login("ernesto", "password123")
         error = self.login.select_element_by_xpath(self.login.username_error)

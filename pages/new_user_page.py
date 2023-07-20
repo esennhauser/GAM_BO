@@ -9,18 +9,17 @@ class NewUserPage(UsersPage):
     cerrar_sesion = "//li[@class='MuiButtonBase-root MuiMenuItem-root MuiMenuItem-gutters MuiMenuItem-root " \
                     "MuiMenuItem-gutters css-158bkwc'][contains(.,'Cerrar sesión')]"
 
-    nombre = "//h6[@class='MuiTypography-root MuiTypography-h6 css-1y7uqee']//following::input[1]"
-    apellido = "//h6[@class='MuiTypography-root MuiTypography-h6 css-1y7uqee']//following::input[2]"
-    user = "//h6[@class='MuiTypography-root MuiTypography-h6 css-1y7uqee']//following::input[3]"
-    email = "//h6[@class='MuiTypography-root MuiTypography-h6 css-1y7uqee']//following::input[4]"
-    password = "//h6[@class='MuiTypography-root MuiTypography-h6 css-1y7uqee']//following::input[5]"
-    habilitacion = "//body/div[@id='__next']/div[1]/div[2]/main[1]/div[1]/div[1]/div[2]/form[1]/div[7]/div[1]" \
-                   "/label[1]/span[1]/input[1]"
-    salesman = "//h6[@class='MuiTypography-root MuiTypography-h6 css-1y7uqee']//following::input[6]"
-    confirmar = "//button[contains(.,'Confirmar')]"
+    nombre = "//input[@id='firstNameInput']"
+    apellido = "//input[@id='lastNameInput']"
+    user = "//input[@id='lastNameInput']//following::input[1]"
+    email = "//input[@id='lastNameInput']//following::input[2]"
+    password = "//input[@id='lastNameInput']//following::input[3]"
+    habilitacion = "//input[@type='checkbox']"
+    salesman = "(//input[@type='text'])[6]"
+    confirmar = "//button[contains(.,'Guardar')]"
 
     # Roles
-    rol = "//div[@id='select-role']"
+    rol = "(//div[@role='button'])[14]"
 
     rol_administrador = "//body/div[@id='menu-']/div[3]/ul[1]/li[1]"
     rol_vendedor = "//body/div[@id='menu-']/div[3]/ul[1]/li[2]"

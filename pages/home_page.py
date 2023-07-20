@@ -7,7 +7,7 @@ class HomePage(LoginPage):
 
     avatar = "//*[@id='__next']/div/header/div[1]/div/div/div/span/div"
     cerrar_sesion = "(//li[@tabindex='-1'])[2]"
-    mensaje_inicio = "//h6[contains(.,'Gam')]"
+    mensaje_inicio = "//p[contains(.,'Bienvenido')]"
     administrador = "//p[contains(text(),'Administrador')]"
     usuarios = "(//div[contains(.,'Usuarios')])[6]"
 
