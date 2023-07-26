@@ -18,7 +18,7 @@ def setup_login(request, driver):
     request.node.login = login
 
 
-@when(parse_num("we login with '{username:String}' and '{password:String}'"))
+@when(parse_num('we login with "{username:String}" and "{password:String}"'))
 def wrong_username_and_wrong_password(request, username, password):
     request.node.login.login(username, password)
 

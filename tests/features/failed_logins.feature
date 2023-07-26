@@ -6,27 +6,15 @@ Feature: failing to login GAM
   Background: GAM 2.0 BO dev environment
               I am on the Log in Page
 
-  Scenario:  Wrong Username And Wrong Password
+  Scenario Outline:  Invalid Login
     Given we launch browser and go to GAM
-    When we login with 'ernesto' and 'password123'
-    Then The error message is: "Email or Password is invalid"
+    When we login with "<username>" and "<password>"
+    Then The error message is: "<error message>"
 
-  Scenario:  Empty Username And Wrong Password
-    Given we launch browser and go to GAM
-    When we login with ' ' and 'password123'
-    Then The error message is: "password must be at least 6 characters"
-
-  Scenario:  Wrong Username And Empty Password
-    Given we launch browser and go to GAM
-    When we login with 'ernesto' and ' '
-    Then The error message is: "password must be at least 6 characters"
-
-  Scenario:  Empty Username And Empty Password
-    Given we launch browser and go to GAM
-    When we login with ' ' and ' '
-    Then The error message is: "username must be at least 6 characters"
-
-  Scenario:  Wrong Password
-    Given we launch browser and go to GAM
-    When we login with 'admin@guialemor.com' and 'password123'
-    Then The error message is: "Email or Password is invalid"
+    Examples: Error messages
+      | username            | password     | error message                             |
+      | ernesto             | password123  | Email or Password is invalid              |
+      |                     | password123  | username must be at least 6 characters    |
+      | ernesto             |              | password must be at least 6 characters    |
+      |                     |              | username must be at least 6 characters    |
+      | admin@guialemor.com | password123  | Email or Password is invalid              |
