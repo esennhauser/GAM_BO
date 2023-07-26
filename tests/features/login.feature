@@ -4,9 +4,10 @@ Feature: login GAM
   So that I can verify the login functionality.
 
   Background: GAM 2.0 BO dev environment
-    Given: I am on the Log in Page
+              I am on the Log in Page
 
   Scenario:  login successfully
-     Given we launch browser and go to GAM
-      When we login with <username> and <password>
+      Given we launch browser and go to GAM
+      When we login with 'administrative@test.com' and 'g4mr3n0v4c10n'
       Then Bienvenido is at the top corner
+

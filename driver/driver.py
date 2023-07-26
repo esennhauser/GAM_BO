@@ -21,8 +21,8 @@ def driver(request):
 
     print("Page opened: " + str(gam_dev))
 
-    request.cls.errors = errors
-    request.cls.driver = driver
+    request.node.errors = errors
+    request.node.driver = driver
     yield
 
     # Printing errors
