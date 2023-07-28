@@ -4,9 +4,9 @@ import requests
 
 
 @pytest.fixture(autouse=True, scope="class")
-def setup_login(request, driver):
-    login = LoginPage(request.cls.driver, request.cls.errors)
-    request.cls.login = login
+def setup_login(test_info):
+    login = LoginPage(test_info[0], test_info[1])
+    return login
 
 
 class TestApis:
