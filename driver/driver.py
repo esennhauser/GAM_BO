@@ -31,7 +31,7 @@ def test_info():
     if len(errors_verified) == 0:
         print("\n\t\tTest finished with no errors. ")
     else:
-        print(errors_verified)
+        print("\n\t\t{}".format(errors_verified))
 
     driver.quit()
-    print("\n\t\tTest is finished.")
+    print("\t\tTest is finished.\n")
