@@ -3,12 +3,10 @@ from selenium import webdriver
 from selenium.webdriver.chrome.options import Options as ChromeOptions
 from selenium.webdriver.chrome.service import Service as ChromeService
 from webdriver_manager.chrome import ChromeDriverManager
-from selenium.webdriver.common.keys import Keys
-from pages.google_login_page import GoogleLoginPage
 
 
 @pytest.fixture(scope="class")
-def test_info(request):
+def test_info():
     gam_dev = "https://gam-gam-renovacion-backoffice.development.mag.dev/login"
 
     options = ChromeOptions()

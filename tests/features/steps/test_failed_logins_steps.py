@@ -31,7 +31,7 @@ def wrong_username_and_wrong_password(setup_login, username, password):
 def verify_error(test_info, setup_login, error_message):
     error = setup_login.select_element_by_xpath(setup_login.username_error)
     try:
-        assert error.text == error_message, print("ERROR. Unexpected error message.")
+        assert error.text == error_message, "ERROR. Unexpected error message."
         print("Error message as expected. ")
     except Exception as ex:
         test_info[1].append(ex)
