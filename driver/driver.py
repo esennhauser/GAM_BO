@@ -8,7 +8,7 @@ from pages.google_login_page import GoogleLoginPage
 
 
 @pytest.fixture(scope="class")
-def driver(request):
+def test_info(request):
     gam_dev = "https://gam-gam-renovacion-backoffice.development.mag.dev/login"
 
     options = ChromeOptions()
@@ -21,9 +21,7 @@ def driver(request):
 
     print("Page opened: " + str(gam_dev))
 
-    request.node.errors = errors
-    request.node.driver = driver
-    yield
+    yield driver, errors
 
     # Printing errors
     errors_verified = errors.copy()
